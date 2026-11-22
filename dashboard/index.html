@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Risk-Adjusted Token Radar — radar-5</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Risk-Adjusted Token Radar</h1>
+    <p class="sub">Pre-token protocols ranked by fitted launch value — every number from the snapshot, nothing hardcoded.</p>
+  </div>
+  <div class="top-right" id="genLine"></div>
+</header>
+
+<section class="kpi" id="kpiStrip"></section>
+
+<section class="evidence" id="evidencePanel">
+  <h2>How this radar answers the five checks</h2>
+  <ol id="evidenceList"></ol>
+</section>
+
+<div class="layout">
+  <aside class="rail">
+    <section class="card">
+      <h2>Top signals</h2>
+      <ol class="ladder" id="ladder"></ol>
+    </section>
+    <section class="card">
+      <h2>Pinned</h2>
+      <div id="pinnedStrip"><p class="muted">Pin a row to keep it here.</p></div>
+    </section>
+    <section class="card">
+      <h2>What if</h2>
+      <div id="sandbox">
+        <label>TVL multiplier <output id="sbTvlOut">1.0&times;</output>
+          <input type="range" id="sbTvl" min="0.5" max="3" step="0.1" value="1">
+        </label>
+        <label>Age (years) <output id="sbAgeOut">2</output>
+          <input type="range" id="sbAge" min="0" max="5" step="0.5" value="2">
+        </label>
+        <p class="muted">Pick a board row first — the sandbox reprices it with the fitted line.</p>
+        <div id="sbResult"></div>
+      </div>
+    </section>
+  </aside>
+
+  <main class="board-col">
+    <div class="tabs" role="tablist">
+      <button id="tabBoard" class="tab active" role="tab">Pre-token board (<span id="boardCount"></span>)</button>
+      <button id="tabLive" class="tab" role="tab">Live anchors (<span id="anchorCount"></span>)</button>
+    </div>
+
+    <div class="filters" id="boardFilters">
+      <input id="fSearch" type="search" placeholder="Search protocol…">
+      <select id="fCat"><option value="">All categories</option></select>
+      <select id="fChain"><option value="">All chains</option></select>
+      <select id="fVerdict">
+        <option value="">All verdicts</option>
+        <option>Farm</option><option>Thin</option><option>Skip</option>
+      </select>
+      <label class="chk"><input id="fWatch" type="checkbox"> Watchlist only</label>
+      <span class="count" id="rowCount"></span>
+    </div>
+
+    <div class="compare-bar" id="compareBar" hidden>
+      <span id="compareLabel"></span>
+      <button id="compareGo">Compare</button>
+      <button id="compareClear">Clear</button>
+    </div>
+
+    <div id="compareView" hidden></div>
+
+    <table class="board" id="boardTable">
+      <thead><tr id="boardHead"></tr></thead>
+      <tbody id="boardBody"></tbody>
+    </table>
+
+    <table class="board" id="anchorTable" hidden>
+      <thead><tr id="anchorHead"></tr></thead>
+      <tbody id="anchorBody"></tbody>
+    </table>
+
+    <section class="detail" id="detail" hidden>
+      <div class="detail-head">
+        <h2 id="detailName"></h2>
+        <button id="detailClose">Close</button>
+      </div>
+      <div class="tabs small">
+        <button class="tab active" data-dtab="overview">Overview</button>
+        <button class="tab" data-dtab="farm">Farm plan</button>
+        <button class="tab" data-dtab="model">Model</button>
+      </div>
+      <div id="detailBody"></div>
+    </section>
+
+    <section class="method" id="methodology">
+      <h2>Methodology</h2>
+      <div id="methodBody"></div>
+    </section>
+
+    <section class="integrity" id="integrityStrip"></section>
+  </main>
+</div>
+<script src="../data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
